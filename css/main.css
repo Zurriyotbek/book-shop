@@ -390,7 +390,7 @@ img {
 .header__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .header__logo {
@@ -398,7 +398,12 @@ img {
   height: 25px;
 }
 
-.header__cart {
+.header__cart__wrapper {
+  display: flex;
+  gap: 25px;
+}
+
+.header__cart, .header__favourites {
   position: relative;
   width: 20px;
   height: 20px;
@@ -411,7 +416,7 @@ img {
   background-color: transparent;
 }
 
-.header__cart__count {
+.header__cart__count, .header__favourites__count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -428,5 +433,341 @@ img {
   font-size: 14px;
   line-height: 16px;
   text-transform: uppercase;
+}
+
+.header__favourites {
+  background-image: url(../../assets/icons/star-regular.svg);
+}
+
+#main {
+  padding-bottom: 50px;
+  flex-grow: 1;
+}
+
+.catalog {
+  padding-top: 40px;
+}
+
+.catalog__container {
+  display: flex;
+  gap: 30px;
+}
+
+.catalog__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  list-style: none;
+}
+
+.item {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  background-color: #fff;
+}
+
+.item:last-child {
+  align-self: flex-start;
+}
+
+.item:hover {
+  filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+}
+
+.item:hover .item__btn-group {
+  display: flex;
+}
+
+.item:hover .item__body__more {
+  display: inline-block;
+}
+
+.item__img {
+  width: 100%;
+  height: 200px;
+  cursor: grab;
+  text-align: center;
+}
+
+.item__img img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item__body {
+  padding: 15px;
+  position: relative;
+}
+
+.item__body__title {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  font-weight: 600;
+  font-size: 18px;
+  color: #1d1f22;
+}
+
+.item__body__author {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
+.item__body__price {
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 160%;
+  color: #5ece7b;
+}
+
+.item__body__more {
+  position: absolute;
+  display: none;
+  bottom: 15px;
+  animation: fadein 0.5s forwards;
+  border: none;
+  background-color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #5ece7b;
+}
+
+.item__body__more:hover {
+  color: #25c04f;
+}
+
+.item__btn-group {
+  display: none;
+  position: absolute;
+  top: -60px;
+  right: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  width: max-content;
+  animation: fadeinRight 0.5s forwards;
+}
+
+.item__btn-group__fav, .item__btn-group__fav--default {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url(../../assets/icons/star-solid.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.item__btn-group__fav:hover, .item__btn-group__fav--default:hover {
+  transform: scale(1.1);
+}
+
+.item__btn-group__fav--default {
+  background-image: url(../../assets/icons/star-regular-green.svg);
+}
+
+.item__btn-group__add {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  background-image: url(../../assets/icons/card-cart.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.item__btn-group__add:hover {
+  transform: scale(1.1);
+}
+
+.aside {
+  background-color: #fff;
+  min-width: 30%;
+  text-align: center;
+}
+
+.aside__wrap {
+  padding: 10px;
+}
+
+.aside__item {
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  text-align: left;
+  background-color: #f8f8f8;
+  width: 90%;
+  border-radius: 10px;
+  color: #1d1f22;
+}
+
+.aside__item h4 {
+  margin: 0;
+  margin-bottom: 15px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.aside__item__bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aside__item__bottom p {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+.aside__item__btn-wrap button {
+  cursor: pointer;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+  color: #5ece7b;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.aside__item__btn-wrap button:first-of-type {
+  margin-right: 10px;
+}
+
+.aside__item__btn-wrap button:hover {
+  background-color: lightgray;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeinRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  overflow-y: auto;
+}
+
+.overlay--hidden {
+  display: none !important;
+}
+
+.modal {
+  padding: 10px 20px;
+  padding-top: 60px;
+  position: relative;
+  width: 800px;
+  height: 500px;
+  background-color: white;
+  animation: fadeInTop 0.5s;
+}
+
+.modal__close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 25px;
+  height: 25px;
+  background-image: url(../../assets/icons/x-solid.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.modal__left {
+  width: 300px;
+  height: 400px;
+  min-width: 300px;
+}
+
+.modal__right__author {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 19px;
+  color: #282830;
+  line-height: 30px;
+}
+
+.modal__right__title {
+  margin: 0;
+  margin-left: 8px;
+  padding: 0;
+  font-weight: 400;
+}
+
+.modal__right__price {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.modal__right__desc {
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 /*# sourceMappingURL=main.css.map */

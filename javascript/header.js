@@ -9,8 +9,11 @@ container.innerHTML = `
   <img src="../assets/images/logo.svg" alt="site logo">
 </a>
 <div class="header__cart__wrapper"> 
+  <button class="header__favourites"> 
+    <span class="header__favourites__count">0</span>
+  </button>
   <button class="header__cart"> 
-    <span class="header__cart__count">3</span>
+    <span class="header__cart__count">0</span>
   </button>
  </div>
 `;
@@ -19,5 +22,3 @@ container.innerHTML = `
 let fragment = document.createDocumentFragment();
 fragment.appendChild(container);
 header.appendChild(fragment);
-
-export let number = 10;
