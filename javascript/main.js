@@ -139,6 +139,9 @@ function renderBooks(booksArray, nodeElement) {
     itemImg.addEventListener("dragover", (e) => {
       console.log("dragging");
     });
+    itemImg.addEventListener("dragenter", (e) => {
+      console.log("dragging enter");
+    });
     itemImg.addEventListener("dragend", (e) => {
       e.target.classList.remove("holding");
     });
