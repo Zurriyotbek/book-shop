@@ -11,7 +11,7 @@ import {
 } from "./functions.js";
 
 // url data fetch
-let url = "../data/data.json";
+let url = "./data/data.json";
 
 // Books data
 let booksData = [];
