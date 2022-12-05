@@ -106,7 +106,7 @@
       width: 25px;
       height: 25px;
       background-color: transparent;
-      background-image: url(../../assets/icons/star-solid.svg);
+      background-image: url(./../assets/icons/star-solid.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -120,14 +120,14 @@
 
       &--default {
         @extend .item__btn-group__fav;
-        background-image: url(../../assets/icons/star-regular-green.svg);
+        background-image: url(./../assets/icons/star-regular-green.svg);
       }
     }
     &__add {
       width: 25px;
       height: 25px;
       background-color: transparent;
-      background-image: url(../../assets/icons/card-cart.svg);
+      background-image: url(./../assets/icons/card-cart.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;

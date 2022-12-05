@@ -6,7 +6,7 @@ let container = document.createElement("div");
 container.className = "container header__container";
 container.innerHTML = `
 <a class="header__logo" href="#" > 
-  <img src="../assets/images/logo.svg" alt="site logo">
+  <img src="./assets/images/logo.svg" alt="site logo">
 </a>
 <div class="header__cart__wrapper"> 
   <button class="header__favourites"> 

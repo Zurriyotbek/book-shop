@@ -52,7 +52,7 @@
 
   &__favourites {
     @extend .header__cart;
-    background-image: url(../../assets/icons/star-regular.svg);
+    background-image: url(./../assets/icons/star-regular.svg);
 
     &__count {
       @extend .header__cart__count;
