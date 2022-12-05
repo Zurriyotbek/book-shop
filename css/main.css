@@ -597,7 +597,8 @@ img {
 
 .aside {
   background-color: #fff;
-  min-width: 30%;
+  min-width: 322px;
+  max-width: 322px;
   text-align: center;
 }
 
@@ -624,6 +625,7 @@ img {
 }
 
 .aside__item__bottom {
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -651,6 +653,24 @@ img {
 
 .aside__item__btn-wrap button:hover {
   background-color: lightgray;
+}
+
+.aside__remove-btn {
+  padding: 8px 16px;
+  border: none;
+  background-color: #fff;
+  color: red;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.aside__remove-btn:hover {
+  border: 2px solid red;
+}
+
+.holding {
+  border: 2px solid #5ece7b;
 }
 
 @keyframes fadein {

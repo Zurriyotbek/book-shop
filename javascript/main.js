@@ -2,7 +2,13 @@
 
 // Imports
 import getData from "./fetchData.js";
-import { findBook, addToFavourites } from "./functions.js";
+import {
+  findBook,
+  addToFavourites,
+  resetCartCount,
+  removeBook,
+  updateCartCount,
+} from "./functions.js";
 
 // url data fetch
 let url = "../data/data.json";
@@ -105,6 +111,7 @@ function renderBooks(booksArray, nodeElement) {
     // set attributes
     itemImg.src = `${book?.imageLink}`;
     itemImg.alt = "a book cover";
+    itemImg.draggable = true;
     itemBodyBtnMore.dataset.id = book?.id;
 
     // Append elements
@@ -125,6 +132,17 @@ function renderBooks(booksArray, nodeElement) {
     itemFragment.appendChild(item);
     nodeElement.appendChild(itemFragment);
 
+    // Event listener to img
+    itemImg.addEventListener("dragstart", (e) => {
+      e.target.classList.add("holding");
+    });
+    itemImg.addEventListener("dragover", (e) => {
+      console.log("dragging");
+    });
+    itemImg.addEventListener("dragend", (e) => {
+      e.target.classList.remove("holding");
+    });
+
     // Add event listener to more btn
     itemBodyBtnMore.addEventListener("click", handlePopUpOpen);
 
@@ -133,9 +151,6 @@ function renderBooks(booksArray, nodeElement) {
       let arr = booksData.map((el) => {
         if (el.id === book.id) {
           el.isFavourite = !el.isFavourite;
-          el.isFavourite
-            ? itemFavBtn.classList.add("hello")
-            : itemFavBtn.classList.remove("hello");
 
           if (!favourites.includes(el)) {
             favourites.unshift(el);
@@ -149,9 +164,7 @@ function renderBooks(booksArray, nodeElement) {
       });
 
       favouriteCount.textContent = favourites.length;
-
       setBooksArr(arr);
-
       renderBooks(arr, catalogList);
     });
 
@@ -248,35 +261,40 @@ catalogAside.appendChild(cartItemsWrapper);
 // render items function
 function renderCartItems(array, nodeElement) {
   nodeElement.innerHTML = null;
+
+  let cartCount = document.querySelector(".header__cart__count");
+  cartCount.textContent = array.length;
+
   array.forEach((item) => {
     let bookInfo = document.createElement("div");
     bookInfo.className = "aside__item";
     bookInfo.innerHTML = `
       <h4>${item.title}</h4>
       <div class="aside__item__bottom">
-        <p>$${item.price}</p>
+        <p>$${item.price * item.count}</p>
         <div class="aside__item__btn-wrap">
-          <button class="btn--minus">-</button>
-          <button class="btn--plus">+</button>
+          <button class="btn--minus" data-id="${item.id}">-</button>
+          <button class="btn--plus" data-id="${item.id}">+</button>
         </div>
         <p>${item.count}</p>
       </div>
+      <button class="aside__remove-btn" data-id="${item.id}">Remove</button>
       `;
+
     nodeElement.appendChild(bookInfo);
+
+    localStorage.setItem("cart", JSON.stringify(array));
   });
 }
+
+setTimeout(() => {
+  renderCartItems(cartList, cartItemsWrapper);
+}, 1000);
 
 //////////////////
 // Add to cart
 function addToCart(id) {
-  if (cartList.some((i) => i.id === id)) {
-    cartList.forEach((item) => {
-      if (item.id === id) {
-        item.count += 1;
-      }
-    });
-    return;
-  } else {
+  if (!cartList.some((i) => i.id === id)) {
     let found = booksData.filter((el) => {
       if (el.id === id) {
         return el;
@@ -284,11 +302,62 @@ function addToCart(id) {
     })[0];
 
     found = { ...found, count: 1 };
-    cartList.push(found);
+    cartList.unshift(found);
   }
 
   let cartCount = document.querySelector(".header__cart__count");
   cartCount.textContent = cartList.length;
 
   renderCartItems(cartList, cartItemsWrapper);
+
+  localStorage.setItem("cart", JSON.stringify(cartList));
 }
+
+// add/subtract count of selected book
+cartItemsWrapper.addEventListener("click", (e) => {
+  if (e.target.matches(".btn--plus")) {
+    let id = Number(e.target.dataset.id);
+    addCount(id);
+    renderCartItems(cartList, cartItemsWrapper);
+  }
+  if (e.target.matches(".btn--minus")) {
+    let id = Number(e.target.dataset.id);
+    subtractCount(id);
+    renderCartItems(cartList, cartItemsWrapper);
+  }
+  if (e.target.matches(".aside__remove-btn")) {
+    let id = Number(e.target.dataset.id);
+    removeBook(id, cartList);
+    renderCartItems(cartList, cartItemsWrapper);
+    updateCartCount(cartList);
+  }
+});
+
+// add function
+function addCount(id) {
+  cartList.forEach((el) => {
+    if (el.id === id) {
+      el.count += 1;
+    }
+  });
+}
+
+// subtract function
+function subtractCount(id) {
+  cartList.forEach((el) => {
+    if (el.id === id) {
+      if (el.count === 1) {
+        el.count = 0;
+        cartList.splice(cartList.indexOf(el), 1);
+        resetCartCount();
+        return;
+      } else {
+        el.count -= 1;
+      }
+    }
+  });
+}
+
+// Handle drag start
+// Handle drag over
+// Handle drag end

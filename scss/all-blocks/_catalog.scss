@@ -145,7 +145,8 @@
 // Catalog Aside
 .aside {
   background-color: #fff;
-  min-width: 30%;
+  min-width: 322px;
+  max-width: 322px;
   text-align: center;
 
   &__wrap {
@@ -170,6 +171,7 @@
     }
 
     &__bottom {
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
 
@@ -201,6 +203,24 @@
       }
     }
   }
+
+  &__remove-btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: #fff;
+    color: red;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid red;
+    }
+  }
+}
+
+.holding {
+  border: 2px solid $main-color;
 }
 
 @keyframes fadein {
