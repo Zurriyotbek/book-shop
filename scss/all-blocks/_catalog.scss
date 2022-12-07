@@ -144,10 +144,55 @@
 
 // Catalog Aside
 .aside {
+  padding-top: 20px;
   background-color: #fff;
   min-width: 322px;
   max-width: 322px;
   text-align: center;
+
+  & > h2 {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  &__top {
+    margin-bottom: 30px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > p {
+      margin: 0;
+      padding: 0;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .confirm--btn {
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+      background: #ffffff;
+      border: 1px solid #1d1f22;
+      width: 140px;
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 120%;
+      text-transform: uppercase;
+      color: #1d1f22;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $main-color;
+        border: 1px solid $main-color;
+        color: #fff;
+      }
+    }
+  }
 
   &__wrap {
     padding: 10px;

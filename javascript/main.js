@@ -8,6 +8,7 @@ import {
   resetCartCount,
   removeBook,
   updateCartCount,
+  updateTextContent,
 } from "./functions.js";
 
 // url data fetch
@@ -48,19 +49,33 @@ let catalogSection = document.createElement("section");
 let catalogContainer = document.createElement("div");
 let catalogAside = document.createElement("aside");
 let catalogAsideHeading = document.createElement("h2");
+let catalogAsideTop = document.createElement("div");
+let confirmOrderBtn = document.createElement("a");
+let totalCount = document.createElement("p");
 let catalogList = document.createElement("ul");
 
 // Text content
-catalogAsideHeading.innerHTML = "Cart";
+catalogAsideHeading.innerHTML = "Bag";
+totalCount.textContent = `Total: $0`;
+confirmOrderBtn.textContent = "Confirm order";
 
 // Add class names for
 catalogSection.className = "catalog";
 catalogContainer.className = "container catalog__container";
 catalogAside.className = "aside";
+catalogAsideTop.className = "aside__top";
+confirmOrderBtn.className = "confirm--btn";
+totalCount.className = "aside__total";
 catalogList.className = "catalog__list";
 
+// Set attribute
+confirmOrderBtn.href = "./order.html";
+
 // Append child
+catalogAsideTop.appendChild(totalCount);
+catalogAsideTop.appendChild(confirmOrderBtn);
 catalogAside.appendChild(catalogAsideHeading);
+catalogAside.appendChild(catalogAsideTop);
 catalogContainer.appendChild(catalogAside);
 catalogContainer.appendChild(catalogList);
 catalogSection.appendChild(catalogContainer);
@@ -169,6 +184,8 @@ function renderBooks(booksArray, nodeElement) {
       favouriteCount.textContent = favourites.length;
       setBooksArr(arr);
       renderBooks(arr, catalogList);
+
+      // localStorage.setItem("favourites", JSON.stringify(favourites));
     });
 
     // Add event listener to add cart button
@@ -248,9 +265,6 @@ document.addEventListener("click", (e) => {
 });
 ///////////////////
 
-//////////////////
-// Add to favourites
-
 /////////////////////////////
 ///////// Cart /////////////
 
@@ -286,6 +300,8 @@ function renderCartItems(array, nodeElement) {
 
     nodeElement.appendChild(bookInfo);
 
+    updateTextContent(totalCount, array);
+
     localStorage.setItem("cart", JSON.stringify(array));
   });
 }
@@ -305,7 +321,7 @@ function addToCart(id) {
     })[0];
 
     found = { ...found, count: 1 };
-    cartList.unshift(found);
+    cartList.push(found);
   }
 
   let cartCount = document.querySelector(".header__cart__count");
@@ -334,6 +350,7 @@ cartItemsWrapper.addEventListener("click", (e) => {
     renderCartItems(cartList, cartItemsWrapper);
     updateCartCount(cartList);
   }
+  updateTextContent(totalCount, cartList);
 });
 
 // add function
