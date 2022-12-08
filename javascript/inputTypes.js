@@ -34,7 +34,7 @@ export let inputTypes = {
   },
   date: {
     classList: "date__label label__text",
-    title: "Choose date",
+    title: "Choose delivery date",
     type: "date",
     id: "date__input",
     name: "date",
