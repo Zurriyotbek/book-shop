@@ -446,6 +446,8 @@ img {
 
 .catalog {
   padding-top: 40px;
+  border: 2px solid transparent;
+  position: relative;
 }
 
 .catalog__container {
@@ -601,6 +603,7 @@ img {
   min-width: 322px;
   max-width: 322px;
   text-align: center;
+  position: relative;
 }
 
 .aside > h2 {
@@ -712,6 +715,10 @@ img {
 
 .aside__remove-btn:hover {
   border: 2px solid red;
+}
+
+.aside__drag-over {
+  background-color: gray;
 }
 
 .holding {

@@ -150,13 +150,9 @@ function renderBooks(booksArray, nodeElement) {
     // Event listener to img
     itemImg.addEventListener("dragstart", (e) => {
       e.target.classList.add("holding");
+      e.dataTransfer.setData("id", book.id);
     });
-    itemImg.addEventListener("dragover", (e) => {
-      console.log("dragging");
-    });
-    itemImg.addEventListener("dragenter", (e) => {
-      console.log("dragging enter");
-    });
+
     itemImg.addEventListener("dragend", (e) => {
       e.target.classList.remove("holding");
     });
@@ -195,6 +191,30 @@ function renderBooks(booksArray, nodeElement) {
   });
 }
 ////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+// Handle drag and drop
+
+catalogAside.addEventListener("dragenter", (e) => {
+  catalogAside.classList.add("aside__drag-over");
+});
+
+catalogAside.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+catalogAside.addEventListener("dragleave", (e) => {
+  catalogAside.classList.remove("aside__drag-over");
+});
+
+catalogAside.addEventListener("drop", (e) => {
+  let bookId = Number(e.dataTransfer.getData("id"));
+  catalogAside.classList.remove("aside__drag-over");
+  return addToCart(bookId);
+});
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 ////////////////////
 setTimeout(() => {

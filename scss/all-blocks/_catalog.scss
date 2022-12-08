@@ -1,5 +1,8 @@
 .catalog {
   padding-top: 40px;
+  border: 2px solid transparent;
+  position: relative;
+
   &__container {
     display: flex;
     gap: 30px;
@@ -149,6 +152,7 @@
   min-width: 322px;
   max-width: 322px;
   text-align: center;
+  position: relative;
 
   & > h2 {
     margin: 0;
@@ -261,6 +265,10 @@
     &:hover {
       border: 2px solid red;
     }
+  }
+
+  &__drag-over {
+    background-color: gray;
   }
 }
 
